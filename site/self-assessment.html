@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Professional Self-Assessment | Steven Foltz CS 499</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:#0d1117; --bg2:#161b22; --bg3:#1c2128; --border:#30363d;
+      --accent:#3fb950; --accent2:#58a6ff; --accent3:#f78166;
+      --text:#e6edf3; --text2:#8b949e; --text3:#c9d1d9;
+      --serif:'DM Serif Display',serif; --sans:'DM Sans',sans-serif; --mono:'DM Mono',monospace;
+      --radius:8px; --max:800px;
+    }
+    html { scroll-behavior: smooth; }
+    body { background:var(--bg); color:var(--text); font-family:var(--sans); font-size:16px; line-height:1.7; }
+    nav {
+      position:fixed; top:0; left:0; right:0; z-index:100;
+      background:rgba(13,17,23,0.92); backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--border); height:60px;
+      display:flex; align-items:center;
+    }
+    .nav-inner { max-width:1100px; width:100%; margin:0 auto; padding:0 2rem; display:flex; align-items:center; justify-content:space-between; }
+    .nav-logo { font-family:var(--mono); font-size:0.9rem; color:var(--accent); letter-spacing:.05em; text-decoration:none; }
+    .nav-back { color:var(--text2); text-decoration:none; font-size:0.875rem; font-weight:500; transition:color .2s; }
+    .nav-back:hover { color:var(--text); }
+    .page-wrap { max-width:var(--max); margin:0 auto; padding:7rem 2rem 5rem; }
+    .page-label { font-family:var(--mono); font-size:0.75rem; color:var(--accent); letter-spacing:.12em; text-transform:uppercase; margin-bottom:.75rem; }
+    .page-title { font-family:var(--serif); font-size:clamp(2rem,4vw,3rem); color:var(--text); margin-bottom:2rem; line-height:1.2; }
+    .divider { height:1px; background:var(--border); margin:2.5rem 0; }
+    h2 { font-family:var(--serif); font-size:1.4rem; color:var(--text); margin:2.5rem 0 1rem; }
+    p { color:var(--text3); line-height:1.8; margin-bottom:1.2rem; }
+    p:last-child { margin-bottom:0; }
+    .doc-link {
+      display:inline-flex; align-items:center; gap:.5rem;
+      padding:.6rem 1.2rem; border-radius:var(--radius);
+      background:var(--bg2); border:1px solid var(--border);
+      color:var(--accent2); text-decoration:none; font-size:.875rem; font-weight:500;
+      margin-top:1.5rem; transition:all .2s;
+    }
+    .doc-link:hover { border-color:var(--accent2); background:rgba(88,166,255,.05); }
+    footer { background:var(--bg2); border-top:1px solid var(--border); padding:2rem; text-align:center; }
+    footer p { color:var(--text2); font-size:.85rem; }
+    footer a { color:var(--accent2); text-decoration:none; }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">sf / cs499</a>
+      <a href="index.html" class="nav-back">← Back to Portfolio</a>
+    </div>
+  </nav>
+
+  <div class="page-wrap">
+    <div class="page-label">CS 499 · Final Project</div>
+    <h1 class="page-title">Professional Self-Assessment</h1>
+
+    <p>
+      Completing the Bachelor of Science in Computer Science at Southern New Hampshire University
+      has been a process of building capability layer by layer — from foundational programming
+      concepts through object-oriented design, data structures, software testing, and finally
+      into this capstone experience that required synthesizing all of it into a coherent,
+      professional body of work.
+    </p>
+    <p>
+      The three enhancements completed for this capstone were all applied to the same artifact:
+      the Grazioso Salvare Rescue Animal Dashboard, originally developed in CS 340. Applying all
+      three enhancement categories to a single project was a deliberate choice that demonstrates
+      not only competency in each area individually, but the ability to reason about how those
+      areas interact and make targeted improvements that are good for the whole system.
+    </p>
+
+    <div class="divider"></div>
+    <h2>Collaborating in a Team Environment</h2>
+    <p>
+      Software development is fundamentally a collaborative discipline. In CS 250: Software
+      Development Lifecycle, I worked within a simulated Agile team environment, participating
+      in sprint planning, daily standups, and retrospectives. In CS 320: Software Testing,
+      Automation, and Quality Assurance, I developed an appreciation for how testing functions
+      as a form of team communication — a unit test suite is a specification that any team
+      member can read to understand what a function is supposed to do.
+    </p>
+    <p>
+      This perspective directly influenced the capstone: every enhancement module includes a
+      comprehensive test suite (33 tests for the algorithms module, 21 for the database module)
+      not as a formality, but as documentation of intent that a future collaborator can depend on.
+    </p>
+
+    <div class="divider"></div>
+    <h2>Communicating with Stakeholders</h2>
+    <p>
+      The Grazioso Salvare Dashboard was built for an animal rescue organization whose staff
+      are domain experts in rescue operations, not software engineers. Every design decision
+      had to be justified in terms of what a field coordinator would need. The narratives
+      written for each milestone extend this practice — they are written to be accessible
+      to a technical hiring manager who may not be a MongoDB specialist.
+    </p>
+
+    <div class="divider"></div>
+    <h2>Data Structures and Algorithms</h2>
+    <p>
+      CS 260 established the theoretical foundation for the algorithms enhancement in Milestone
+      Three. What the capstone added was the experience of selecting and implementing those
+      structures for a specific, real problem. The decision to use a hash-map index for O(1)
+      lookups, an inverted index for O(k) breed filtering, a min-heap for ranked candidate
+      retrieval, and binary search for age-range filtering required analyzing the dashboard's
+      access patterns and matching those patterns to the right structures — bridging the gap
+      between knowing a data structure and knowing when to use it.
+    </p>
+
+    <div class="divider"></div>
+    <h2>Software Engineering and Database</h2>
+    <p>
+      The software design enhancement applied principles from IT 315 and CS 250 to restructure
+      the original CS 340 codebase: separating database access, application logic, security,
+      and utilities into distinct, independently testable modules reflecting the
+      single-responsibility principle. Environment-variable-driven configuration means the
+      same code runs in development, staging, and production without modification.
+    </p>
+    <p>
+      The database enhancement introduced a compound index that converts full collection scans
+      to index scans, JSON Schema validation enforced at write time, an explicit connection pool
+      with health-check logic, server-side aggregation pipelines that reduce network transfer,
+      and query performance logging that surfaces COLLSCAN operations during development.
+    </p>
+
+    <div class="divider"></div>
+    <h2>Security</h2>
+    <p>
+      A security mindset was woven through all three enhancement categories. In the software
+      design enhancement, security.py introduced input sanitization, MongoDB query validation
+      rejecting dangerous operators ($where, $eval), password hashing with SHA-256 and salt,
+      and HTTP security headers. In the database enhancement, JSON Schema validation prevents
+      malformed documents at write time, and connection pooling limits concurrent connection
+      exposure. These controls implement defense in depth — multiple independent layers that
+      collectively protect data integrity.
+    </p>
+
+    <div class="divider"></div>
+    <h2>Artifact Summary</h2>
+    <p>
+      The three enhancements form a complete, layered improvement to a single coherent project.
+      The software design foundation established clean architecture; the algorithms enhancement
+      built an efficient in-memory query layer on top of it; the database enhancement
+      completed the persistence strategy with server-side computation and enforced data integrity.
+      Together they demonstrate that I can reason about an entire software system and make
+      targeted, justified improvements to each layer without breaking the others.
+    </p>
+
+    <a href="CS499_Professional_Self_Assessment_Foltz.docx" class="doc-link" download>
+      ⬇ Download Self-Assessment (.docx)
+    </a>
+  </div>
+
+  <footer>
+    <p>Steven Foltz · CS 499 Capstone · Southern New Hampshire University · 2026</p>
+    <p style="margin-top:.5rem;"><a href="index.html">← Back to Portfolio</a></p>
+  </footer>
+</body>
+</html>

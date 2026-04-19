@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Milestone Two: Software Design & Engineering | Steven Foltz CS 499</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#0d1117;--bg2:#161b22;--bg3:#1c2128;--border:#30363d;
+      --accent:#3fb950;--accent2:#58a6ff;--accent3:#f78166;
+      --text:#e6edf3;--text2:#8b949e;--text3:#c9d1d9;
+      --serif:'DM Serif Display',serif;--sans:'DM Sans',sans-serif;--mono:'DM Mono',monospace;
+      --radius:8px;--max:860px;
+    }
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.7}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(13,17,23,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:60px;display:flex;align-items:center}
+    .nav-inner{max-width:1100px;width:100%;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between}
+    .nav-logo{font-family:var(--mono);font-size:.9rem;color:var(--accent);letter-spacing:.05em;text-decoration:none}
+    .nav-back{color:var(--text2);text-decoration:none;font-size:.875rem;font-weight:500;transition:color .2s}
+    .nav-back:hover{color:var(--text)}
+    .page-wrap{max-width:var(--max);margin:0 auto;padding:7rem 2rem 5rem}
+    .milestone-tag{display:inline-block;font-family:var(--mono);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .8rem;border-radius:999px;margin-bottom:1rem}
+    .m2{background:rgba(63,185,80,.12);color:var(--accent);border:1px solid rgba(63,185,80,.3)}
+    .m3{background:rgba(88,166,255,.12);color:var(--accent2);border:1px solid rgba(88,166,255,.3)}
+    .m4{background:rgba(247,129,102,.12);color:var(--accent3);border:1px solid rgba(247,129,102,.3)}
+    .page-title{font-family:var(--serif);font-size:clamp(2rem,4vw,2.8rem);color:var(--text);margin-bottom:.5rem;line-height:1.2}
+    .page-sub{color:var(--text2);font-size:1rem;margin-bottom:2rem}
+    .divider{height:1px;background:var(--border);margin:2.5rem 0}
+    h2{font-family:var(--serif);font-size:1.35rem;color:var(--text);margin:2.5rem 0 1rem}
+    h3{font-size:1rem;font-weight:600;color:var(--text3);margin:1.5rem 0 .5rem}
+    p{color:var(--text3);line-height:1.8;margin-bottom:1.2rem}
+    p:last-child{margin-bottom:0}
+    ul{color:var(--text3);line-height:1.8;margin-bottom:1.2rem;padding-left:1.5rem}
+    li{margin-bottom:.4rem}
+    .highlight-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin:1.5rem 0}
+    .highlight-box h3{margin-top:0}
+    .stat-row{display:flex;gap:2rem;flex-wrap:wrap;margin:1.5rem 0}
+    .stat-chip{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:.75rem 1.25rem;text-align:center}
+    .stat-chip .num{font-family:var(--serif);font-size:1.5rem;color:var(--accent)}
+    .stat-chip .lbl{font-size:.7rem;color:var(--text2);text-transform:uppercase;letter-spacing:.08em}
+    code{font-family:var(--mono);font-size:.85rem;background:var(--bg3);border:1px solid var(--border);padding:.15rem .4rem;border-radius:4px;color:var(--accent2)}
+    .file-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.5rem}
+    .file-item{display:flex;align-items:center;gap:.75rem;padding:.6rem .9rem;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);font-size:.875rem}
+    .file-icon{font-family:var(--mono);font-size:.7rem;color:var(--accent2);background:rgba(88,166,255,.1);padding:.2rem .4rem;border-radius:4px;flex-shrink:0}
+    .file-name{color:var(--text3);font-family:var(--mono);font-size:.8rem}
+    .file-desc{color:var(--text2);font-size:.8rem;margin-left:auto}
+    .doc-link{display:inline-flex;align-items:center;gap:.5rem;padding:.6rem 1.2rem;border-radius:var(--radius);background:var(--bg2);border:1px solid var(--border);color:var(--accent2);text-decoration:none;font-size:.875rem;font-weight:500;margin-top:1.5rem;margin-right:.75rem;transition:all .2s}
+    .doc-link:hover{border-color:var(--accent2);background:rgba(88,166,255,.05)}
+    .outcome-chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+    .outcome-chip{font-size:.75rem;padding:.3rem .7rem;border-radius:4px;background:var(--bg3);border:1px solid var(--border);color:var(--text2);font-family:var(--mono)}
+    footer{background:var(--bg2);border-top:1px solid var(--border);padding:2rem;text-align:center}
+    footer p{color:var(--text2);font-size:.85rem}
+    footer a{color:var(--accent2);text-decoration:none}
+    @media(max-width:600px){.stat-row{gap:1rem}.file-desc{display:none}}
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">sf / cs499</a>
+      <a href="index.html" class="nav-back">← Back to Portfolio</a>
+    </div>
+  </nav>
+  <div class="page-wrap">
+    <span class="milestone-tag m2">Milestone Two</span>
+    <h1 class="page-title">Software Design &amp; Engineering</h1>
+    <p class="page-sub">Grazioso Salvare Rescue Animal Dashboard · CS 340 Enhancement</p>
+
+    <div class="stat-row">
+      <div class="stat-chip"><div class="num">5</div><div class="lbl">New Modules</div></div>
+      <div class="stat-chip"><div class="num">4</div><div class="lbl">Course Outcomes</div></div>
+      <div class="stat-chip"><div class="num">0</div><div class="lbl">Hardcoded Credentials</div></div>
+      <div class="stat-chip"><div class="num">6</div><div class="lbl">Security Headers</div></div>
+    </div>
+
+    <div class="divider"></div>
+    <h2>Artifact Description</h2>
+    <p>
+      The artifact is the Grazioso Salvare Rescue Animal Dashboard, originally developed in
+      CS 340: Client/Server Development during Spring 2025. The application connects a Python-based
+      Dash web dashboard to a MongoDB database containing records from the Austin Animal Center (AAC),
+      allowing staff to filter shelter animals by rescue suitability category and visualize results
+      on an interactive map and breed chart.
+    </p>
+    <p>
+      The original implementation was a functional prototype: a single monolithic script with
+      hardcoded credentials, no error handling, no logging, and no separation of concerns.
+    </p>
+
+    <div class="divider"></div>
+    <h2>Justification &amp; Skills Demonstrated</h2>
+    <p>
+      This artifact was selected because it presents a realistic, multi-layered software design
+      challenge. The enhancement applied the single-responsibility principle by separating database
+      access, application logic, security, and utility functions into distinct, independently
+      testable modules. The result is a codebase that is maintainable, deployable across
+      environments, and secure by design.
+    </p>
+
+    <h3>Files Introduced</h3>
+    <ul class="file-list">
+      <li class="file-item"><span class="file-icon">.py</span><span class="file-name">app.py</span><span class="file-desc">Restructured Dash app, env-var config, Bootstrap layout</span></li>
+      <li class="file-item"><span class="file-icon">.py</span><span class="file-name">crud.py</span><span class="file-desc">AnimalShelter class with typed CRUD + rescue query methods</span></li>
+      <li class="file-item"><span class="file-icon">.py</span><span class="file-name">crud_operations.py</span><span class="file-desc">Generic CRUD base class with projection, limit, aggregate</span></li>
+      <li class="file-item"><span class="file-icon">.py</span><span class="file-name">security.py</span><span class="file-desc">Input sanitization, query validation, password hashing, HTTP headers</span></li>
+      <li class="file-item"><span class="file-icon">.py</span><span class="file-name">utils.py</span><span class="file-desc">Animal validation, formatting, rescue classification, statistics</span></li>
+    </ul>
+
+    <div class="highlight-box">
+      <h3>Key Enhancements</h3>
+      <ul>
+        <li>Hardcoded credentials replaced with <code>.env</code> environment variables via <code>python-dotenv</code></li>
+        <li>Comprehensive <code>logging</code> throughout all modules with structured timestamps</li>
+        <li><code>SecurityManager</code> class: sanitizes input, rejects dangerous MongoDB operators (<code>$where</code>, <code>$eval</code>), hashes passwords with SHA-256 + salt</li>
+        <li>HTTP security headers: HSTS, X-Content-Type-Options, X-Frame-Options, CSP, X-XSS-Protection</li>
+        <li>Full type annotations (<code>Optional[str]</code>, <code>Dict[str, Any]</code>, etc.) throughout</li>
+        <li>Connection timeout (<code>serverSelectionTimeoutMS=5000</code>) prevents indefinite hangs</li>
+      </ul>
+    </div>
+
+    <div class="divider"></div>
+    <h2>Reflection</h2>
+    <p>
+      The most significant learning was experiencing what "separation of concerns" means in practice
+      beyond a textbook definition. When the original single-script application needed a security fix,
+      there was no clean place to put it — everything was entangled. Building security.py as a
+      dedicated module made it immediately clear which responsibilities belonged there and which
+      belonged in crud.py or utils.py.
+    </p>
+    <p>
+      The challenge of deciding what constitutes a "utility" function versus a domain function
+      also became concrete. The classify_rescue_type() function in utils.py knows about breeds
+      and age ranges — domain knowledge — but is a pure function with no side effects. Placing
+      it in utils.py rather than crud.py keeps the database layer focused on I/O, even though
+      the function uses domain-specific constants.
+    </p>
+
+    <div class="outcome-chips">
+      <span class="outcome-chip">Outcome 2: Professional Communication</span>
+      <span class="outcome-chip">Outcome 4: Software Engineering Tools</span>
+      <span class="outcome-chip">Outcome 5: Security Mindset</span>
+    </div>
+
+    <a href="CS499_Milestone2_Narrative_Foltz.docx" class="doc-link" download>⬇ Download Narrative (.docx)</a>
+    <a href="https://github.com/stevenfoltz/cs499-capstone" class="doc-link" target="_blank" rel="noopener">View Code on GitHub →</a>
+  </div>
+
+  <footer>
+    <p>Steven Foltz · CS 499 Capstone · Southern New Hampshire University · 2026</p>
+    <p style="margin-top:.5rem;"><a href="index.html">← Back to Portfolio</a></p>
+  </footer>
+</body>
+</html>

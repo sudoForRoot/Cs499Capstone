@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Steven Foltz | CS 499 ePortfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset & Variables ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:         #0d1117;
+      --bg2:        #161b22;
+      --bg3:        #1c2128;
+      --border:     #30363d;
+      --accent:     #3fb950;
+      --accent2:    #58a6ff;
+      --accent3:    #f78166;
+      --text:       #e6edf3;
+      --text2:      #8b949e;
+      --text3:      #c9d1d9;
+      --serif:      'DM Serif Display', serif;
+      --sans:       'DM Sans', sans-serif;
+      --mono:       'DM Mono', monospace;
+      --radius:     8px;
+      --max:        1100px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── Nav ───────────────────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(13,17,23,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      height: 60px;
+      display: flex; align-items: center;
+    }
+    .nav-inner {
+      max-width: var(--max);
+      width: 100%; margin: 0 auto;
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 0.9rem;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--text2);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── Hero ──────────────────────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 60% 40%, rgba(63,185,80,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 40% at 20% 80%, rgba(88,166,255,0.05) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(48,54,61,0.3) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(48,54,61,0.3) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+    }
+    .hero-inner {
+      max-width: var(--max);
+      width: 100%; margin: 0 auto;
+      position: relative; z-index: 1;
+    }
+    .hero-tag {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--accent);
+      background: rgba(63,185,80,0.1);
+      border: 1px solid rgba(63,185,80,0.3);
+      padding: 0.3rem 0.8rem;
+      border-radius: 999px;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.08em;
+    }
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--text2);
+      max-width: 540px;
+      margin: 1.5rem 0 2.5rem;
+      line-height: 1.6;
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.65rem 1.4rem;
+      border-radius: var(--radius);
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #0d1117;
+    }
+    .btn-primary:hover { background: #4dc463; transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--accent2); color: var(--accent2); }
+
+    .hero-stats {
+      display: flex; gap: 3rem; margin-top: 4rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--border);
+    }
+    .stat-item { }
+    .stat-num {
+      font-family: var(--serif);
+      font-size: 2rem;
+      color: var(--accent);
+    }
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--text2);
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* ── Section Base ──────────────────────────────────────────────────── */
+    section {
+      padding: 6rem 2rem;
+    }
+    .container {
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+    .section-desc {
+      color: var(--text2);
+      max-width: 580px;
+      margin-bottom: 3rem;
+      line-height: 1.7;
+    }
+
+    /* ── About / Self-Assessment ───────────────────────────────────────── */
+    #about { background: var(--bg2); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .about-text p {
+      color: var(--text3);
+      margin-bottom: 1.2rem;
+      line-height: 1.8;
+    }
+    .about-text p:last-child { margin-bottom: 0; }
+    .outcome-list { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+    .outcome-item {
+      display: flex; gap: 0.75rem; align-items: flex-start;
+      padding: 0.9rem 1rem;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 0.875rem;
+      color: var(--text3);
+      line-height: 1.5;
+    }
+    .outcome-icon {
+      flex-shrink: 0;
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 700;
+      margin-top: 1px;
+    }
+    .oi-green  { background: rgba(63,185,80,0.15);  color: var(--accent);  }
+    .oi-blue   { background: rgba(88,166,255,0.15); color: var(--accent2); }
+    .oi-red    { background: rgba(247,129,102,0.15);color: var(--accent3); }
+
+    /* ── Artifact Cards ────────────────────────────────────────────────── */
+    #artifacts { background: var(--bg); }
+    .artifact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .artifact-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      display: flex; flex-direction: column;
+      transition: border-color 0.2s, transform 0.2s;
+      text-decoration: none;
+    }
+    .artifact-card:hover {
+      border-color: var(--accent2);
+      transform: translateY(-3px);
+    }
+    .card-milestone {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      display: inline-block;
+      width: fit-content;
+    }
+    .m2 { background: rgba(63,185,80,0.12);  color: var(--accent);  }
+    .m3 { background: rgba(88,166,255,0.12); color: var(--accent2); }
+    .m4 { background: rgba(247,129,102,0.12);color: var(--accent3); }
+    .card-title {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      color: var(--text);
+      margin-bottom: 0.6rem;
+    }
+    .card-desc {
+      color: var(--text2);
+      font-size: 0.875rem;
+      line-height: 1.6;
+      flex: 1;
+      margin-bottom: 1.25rem;
+    }
+    .card-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .tag {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      background: var(--bg3);
+      color: var(--text2);
+      border: 1px solid var(--border);
+    }
+    .card-arrow {
+      margin-top: 1.25rem;
+      color: var(--text2);
+      font-size: 0.8rem;
+      display: flex; align-items: center; gap: 0.35rem;
+    }
+    .artifact-card:hover .card-arrow { color: var(--accent2); }
+
+    /* ── Code Review ───────────────────────────────────────────────────── */
+    #code-review { background: var(--bg2); }
+    .review-box {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      display: flex; gap: 2rem; align-items: center;
+    }
+    .review-icon {
+      width: 80px; height: 80px; flex-shrink: 0;
+      background: rgba(247,129,102,0.1);
+      border: 1px solid rgba(247,129,102,0.3);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+    }
+    .review-content h3 {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+    .review-content p {
+      color: var(--text2);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    /* ── Skills Bar ────────────────────────────────────────────────────── */
+    #skills { background: var(--bg); }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+    .skill-group {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+    }
+    .skill-group-title {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+    .skill-item { margin-bottom: 1rem; }
+    .skill-item:last-child { margin-bottom: 0; }
+    .skill-header { display: flex; justify-content: space-between; margin-bottom: 0.4rem; font-size: 0.875rem; }
+    .skill-name { color: var(--text3); }
+    .skill-pct  { color: var(--text2); font-family: var(--mono); font-size: 0.75rem; }
+    .skill-bar  { height: 4px; background: var(--bg3); border-radius: 2px; overflow: hidden; }
+    .skill-fill {
+      height: 100%; border-radius: 2px;
+      animation: fillBar 1.2s ease forwards;
+      transform-origin: left;
+    }
+    @keyframes fillBar { from { width: 0; } }
+    .fill-green { background: var(--accent); }
+    .fill-blue  { background: var(--accent2); }
+    .fill-red   { background: var(--accent3); }
+
+    /* ── Footer ────────────────────────────────────────────────────────── */
+    footer {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      padding: 2.5rem;
+      text-align: center;
+    }
+    footer p { color: var(--text2); font-size: 0.85rem; }
+    footer a { color: var(--accent2); text-decoration: none; }
+
+    /* ── Responsive ────────────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .artifact-grid { grid-template-columns: 1fr; }
+      .about-grid    { grid-template-columns: 1fr; gap: 2rem; }
+      .skills-grid   { grid-template-columns: 1fr; }
+      .hero-stats    { flex-wrap: wrap; gap: 1.5rem; }
+      .review-box    { flex-direction: column; }
+      .nav-links     { display: none; }
+    }
+
+    /* ── Fade-in animation ─────────────────────────────────────────────── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.6s ease forwards;
+    }
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    .delay-4 { animation-delay: 0.4s; }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ──────────────────────────────────────────────────────── -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">sf / cs499</a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#artifacts">Artifacts</a></li>
+        <li><a href="#code-review">Code Review</a></li>
+        <li><a href="#skills">Skills</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ── Hero ────────────────────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-inner">
+      <div class="hero-tag fade-in">CS 499 · Computer Science Capstone · SNHU 2026</div>
+      <h1 class="fade-in delay-1">
+        Steven Foltz<br/>
+        <em>Computer Science</em><br/>
+        ePortfolio
+      </h1>
+      <p class="hero-sub fade-in delay-2">
+        B.S. Computer Science candidate demonstrating expertise in software design
+        and engineering, algorithms and data structures, and database management
+        through a fully enhanced, production-grade rescue animal dashboard.
+      </p>
+      <div class="hero-actions fade-in delay-3">
+        <a href="#artifacts" class="btn btn-primary">View Artifacts ↓</a>
+        <a href="self-assessment.html" class="btn btn-outline">Professional Self-Assessment</a>
+      </div>
+      <div class="hero-stats fade-in delay-4">
+        <div class="stat-item">
+          <div class="stat-num">3</div>
+          <div class="stat-label">Enhancement Categories</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">54</div>
+          <div class="stat-label">Unit Tests · 0 Failures</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">5</div>
+          <div class="stat-label">Course Outcomes Met</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">9</div>
+          <div class="stat-label">Python Modules</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── About / Self-Assessment ─────────────────────────────────────────── -->
+  <section id="about">
+    <div class="container">
+      <div class="section-label">Introduction</div>
+      <h2 class="section-title">Professional Self-Assessment</h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            Completing the B.S. in Computer Science at SNHU has been a process of building capability
+            layer by layer — from foundational programming through object-oriented design, data structures,
+            software testing, and into this capstone experience that required synthesizing all of it
+            into a coherent, professional body of work.
+          </p>
+          <p>
+            All three enhancement categories were applied to the same artifact: the Grazioso Salvare
+            Rescue Animal Dashboard, originally developed in CS 340. This deliberate choice demonstrates
+            not only competency in each area individually, but the ability to reason about an entire
+            software system and make targeted, justified improvements without breaking the whole.
+          </p>
+          <p>
+            The skills developed across this program — collaborating in team environments, communicating
+            with stakeholders, applying algorithmic thinking, building secure systems, and managing
+            database resources — are demonstrated throughout the artifacts that follow.
+          </p>
+          <a href="self-assessment.html" class="btn btn-outline" style="margin-top:1rem; display:inline-flex;">
+            Read Full Self-Assessment →
+          </a>
+        </div>
+        <div>
+          <ul class="outcome-list">
+            <li class="outcome-item">
+              <span class="outcome-icon oi-green">1</span>
+              Collaborative environments that enable diverse audiences to support organizational decision making
+            </li>
+            <li class="outcome-item">
+              <span class="outcome-icon oi-green">2</span>
+              Professional-quality oral, written, and visual communications adapted to specific audiences
+            </li>
+            <li class="outcome-item">
+              <span class="outcome-icon oi-blue">3</span>
+              Computing solutions using algorithmic principles and CS practices, managing design trade-offs
+            </li>
+            <li class="outcome-item">
+              <span class="outcome-icon oi-blue">4</span>
+              Well-founded techniques and tools implementing solutions that deliver value and accomplish industry goals
+            </li>
+            <li class="outcome-item">
+              <span class="outcome-icon oi-red">5</span>
+              Security mindset anticipating adversarial exploits, mitigating design flaws, ensuring data privacy
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Artifacts ───────────────────────────────────────────────────────── -->
+  <section id="artifacts">
+    <div class="container">
+      <div class="section-label">Enhanced Artifacts</div>
+      <h2 class="section-title">Three Milestones, One Cohesive Project</h2>
+      <p class="section-desc">
+        The Grazioso Salvare Rescue Animal Dashboard was enhanced across three dimensions,
+        each targeting a distinct computer science competency while building on the foundation
+        established by the previous milestone.
+      </p>
+      <div class="artifact-grid">
+
+        <!-- Card 1 -->
+        <a href="milestone2.html" class="artifact-card">
+          <span class="card-milestone m2">Milestone Two</span>
+          <div class="card-title">Software Design &amp; Engineering</div>
+          <div class="card-desc">
+            Restructured the original CS 340 prototype into a modular,
+            production-grade codebase with clean separation of concerns,
+            environment-variable configuration, comprehensive logging,
+            input validation, and HTTP security headers.
+          </div>
+          <div class="card-tags">
+            <span class="tag">Python</span>
+            <span class="tag">Dash</span>
+            <span class="tag">security.py</span>
+            <span class="tag">utils.py</span>
+            <span class="tag">OOP</span>
+          </div>
+          <div class="card-arrow">View narrative &amp; code →</div>
+        </a>
+
+        <!-- Card 2 -->
+        <a href="milestone3.html" class="artifact-card">
+          <span class="card-milestone m3">Milestone Three</span>
+          <div class="card-title">Algorithms &amp; Data Structures</div>
+          <div class="card-desc">
+            Replaced O(n) database scans with purpose-built in-memory
+            structures: hash-map index, breed inverted index, min-heap
+            priority queue, and binary search age-range filter.
+            33 unit tests, 0 failures.
+          </div>
+          <div class="card-tags">
+            <span class="tag">Hash Map</span>
+            <span class="tag">Inverted Index</span>
+            <span class="tag">Min-Heap</span>
+            <span class="tag">Binary Search</span>
+            <span class="tag">O(log n)</span>
+          </div>
+          <div class="card-arrow">View narrative &amp; code →</div>
+        </a>
+
+        <!-- Card 3 -->
+        <a href="milestone4.html" class="artifact-card">
+          <span class="card-milestone m4">Milestone Four</span>
+          <div class="card-title">Databases</div>
+          <div class="card-desc">
+            Added compound indexes (COLLSCAN → IXSCAN), JSON Schema
+            validation, connection pooling with health-check/reconnect,
+            server-side aggregation pipelines, and query performance
+            logging. 21 unit tests, 0 failures.
+          </div>
+          <div class="card-tags">
+            <span class="tag">MongoDB</span>
+            <span class="tag">Indexes</span>
+            <span class="tag">JSON Schema</span>
+            <span class="tag">$facet</span>
+            <span class="tag">Connection Pool</span>
+          </div>
+          <div class="card-arrow">View narrative &amp; code →</div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Code Review ──────────────────────────────────────────────────────── -->
+  <section id="code-review">
+    <div class="container">
+      <div class="section-label">Module One</div>
+      <h2 class="section-title">Code Review</h2>
+      <p class="section-desc">
+        Before any enhancements began, a comprehensive code review analyzed the existing
+        CS 340 artifact and planned the three-milestone improvement strategy.
+      </p>
+      <div class="review-box">
+        <div class="review-icon">▶</div>
+        <div class="review-content">
+          <h3>Informal Code Review Walkthrough</h3>
+          <p>
+            This screencast walkthrough covers the existing functionality of the original
+            Grazioso Salvare Dashboard, a structured analysis of its weaknesses in
+            structure, security, efficiency, and documentation, and a detailed plan for
+            enhancements across all three CS competency categories. The target audience
+            is peers and managers — not a technical deep dive, but a clear explanation
+            of what will change and why.
+          </p>
+          <a href="https://www.youtube.com/watch?v=PLACEHOLDER" class="btn btn-outline" target="_blank" rel="noopener">
+            Watch on YouTube →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Skills ───────────────────────────────────────────────────────────── -->
+  <section id="skills">
+    <div class="container">
+      <div class="section-label">Technical Profile</div>
+      <h2 class="section-title">Skills &amp; Competencies</h2>
+      <p class="section-desc">
+        Developed across the Computer Science program and demonstrated concretely
+        through the capstone artifact enhancements.
+      </p>
+      <div class="skills-grid">
+
+        <div class="skill-group">
+          <div class="skill-group-title">Software Engineering</div>
+          <div class="skill-item">
+            <div class="skill-header"><span class="skill-name">Python / OOP Design</span><span class="skill-pct">90%</span></div>
+            <div class="skill-bar"><div class="skill-fill fill-green" style="width:90%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header"><span class="skill-name">Modular Architecture</span><span class="skill-pct">88%</span></div>
+            <div class="skill-bar"><div class="skill-fill fill-green" style="width:88%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header"><span class="skill-name">Secure Coding Practices</span><span class="skill-pct">85%</span></div>
+            <div class="skill-bar"><div class="skill-fill fill-green" style="width:85%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header"><span class="skill-name">Dash / Web Frameworks</span><span class="skill-pct">80%</span></div>
+            <div class="skill-bar"><div class="skill-fill fill-green" style="width:80%"></div></div>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-title">Algorithms &amp; Data Structures</div>
+          <div class="skill-item">
+            <div class="skill-header"><span class="skill-name">Hash Maps &amp; Indexing</span><span class="skill-pct">88%</span></div>
+            <div class="skill-bar"><div class="skill-fill fill-blue" style="width:88%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header"><span class="skill-name">Heap / Priority Queue</span><span class="skill-pct">85%</span></div>
+            <div class="skill-bar"><div class="skill-fill fill-blue" style="width:85%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header"><span class="skill-name">Binary Search</span><span class="skill-pct">90%</span></div>
+            <div class="skill-bar"><div class="skill-fill fill-blue" style="width:90%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header"><span class="skill-name">Complexity Analysis</span><span class="skill-pct">82%</span></div>
+            <div class="skill-bar"><div class="skill-fill fill-blue" style="width:82%"></div></div>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-title">Databases</div>
+          <div class="skill-item">
+            <div class="skill-header"><span class="skill-name">MongoDB / NoSQL</span><span class="skill-pct">87%</span></div>
+            <div class="skill-bar"><div class="skill-fill fill-red" style="width:87%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header"><span class="skill-name">Index Design</span><span class="skill-pct">85%</span></div>
+            <div class="skill-bar"><div class="skill-fill fill-red" style="width:85%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header"><span class="skill-name">Aggregation Pipelines</span><span class="skill-pct">80%</span></div>
+            <div class="skill-bar"><div class="skill-fill fill-red" style="width:80%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header"><span class="skill-name">Schema Validation</span><span class="skill-pct">83%</span></div>
+            <div class="skill-bar"><div class="skill-fill fill-red" style="width:83%"></div></div>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-title">Professional</div>
+          <div class="skill-item">
+            <div class="skill-header"><span class="skill-name">Technical Writing</span><span class="skill-pct">88%</span></div>
+            <div class="skill-bar"><div class="skill-fill fill-green" style="width:88%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header"><span class="skill-name">Code Documentation</span><span class="skill-pct">90%</span></div>
+            <div class="skill-bar"><div class="skill-fill fill-green" style="width:90%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header"><span class="skill-name">Agile / SDLC</span><span class="skill-pct">80%</span></div>
+            <div class="skill-bar"><div class="skill-fill fill-green" style="width:80%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header"><span class="skill-name">Unit Testing</span><span class="skill-pct">85%</span></div>
+            <div class="skill-bar"><div class="skill-fill fill-green" style="width:85%"></div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ──────────────────────────────────────────────────────────── -->
+  <footer>
+    <p>Steven Foltz · CS 499 Capstone · Southern New Hampshire University · 2026</p>
+    <p style="margin-top:0.5rem;">
+      <a href="https://github.com/stevenfoltz" target="_blank" rel="noopener">GitHub</a>
+      &nbsp;·&nbsp;
+      <a href="self-assessment.html">Self-Assessment</a>
+      &nbsp;·&nbsp;
+      <a href="mailto:steven.foltz@snhu.edu">Contact</a>
+    </p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Milestone Three: Algorithms & Data Structures | Steven Foltz CS 499</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#0d1117;--bg2:#161b22;--bg3:#1c2128;--border:#30363d;
+      --accent:#3fb950;--accent2:#58a6ff;--accent3:#f78166;
+      --text:#e6edf3;--text2:#8b949e;--text3:#c9d1d9;
+      --serif:'DM Serif Display',serif;--sans:'DM Sans',sans-serif;--mono:'DM Mono',monospace;
+      --radius:8px;--max:860px;
+    }
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.7}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(13,17,23,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:60px;display:flex;align-items:center}
+    .nav-inner{max-width:1100px;width:100%;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between}
+    .nav-logo{font-family:var(--mono);font-size:.9rem;color:var(--accent);letter-spacing:.05em;text-decoration:none}
+    .nav-back{color:var(--text2);text-decoration:none;font-size:.875rem;font-weight:500;transition:color .2s}
+    .nav-back:hover{color:var(--text)}
+    .page-wrap{max-width:var(--max);margin:0 auto;padding:7rem 2rem 5rem}
+    .milestone-tag{display:inline-block;font-family:var(--mono);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .8rem;border-radius:999px;margin-bottom:1rem}
+    .m2{background:rgba(63,185,80,.12);color:var(--accent);border:1px solid rgba(63,185,80,.3)}
+    .m3{background:rgba(88,166,255,.12);color:var(--accent2);border:1px solid rgba(88,166,255,.3)}
+    .m4{background:rgba(247,129,102,.12);color:var(--accent3);border:1px solid rgba(247,129,102,.3)}
+    .page-title{font-family:var(--serif);font-size:clamp(2rem,4vw,2.8rem);color:var(--text);margin-bottom:.5rem;line-height:1.2}
+    .page-sub{color:var(--text2);font-size:1rem;margin-bottom:2rem}
+    .divider{height:1px;background:var(--border);margin:2.5rem 0}
+    h2{font-family:var(--serif);font-size:1.35rem;color:var(--text);margin:2.5rem 0 1rem}
+    h3{font-size:1rem;font-weight:600;color:var(--text3);margin:1.5rem 0 .5rem}
+    p{color:var(--text3);line-height:1.8;margin-bottom:1.2rem}
+    p:last-child{margin-bottom:0}
+    ul{color:var(--text3);line-height:1.8;margin-bottom:1.2rem;padding-left:1.5rem}
+    li{margin-bottom:.4rem}
+    .highlight-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin:1.5rem 0}
+    .highlight-box h3{margin-top:0}
+    .stat-row{display:flex;gap:2rem;flex-wrap:wrap;margin:1.5rem 0}
+    .stat-chip{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:.75rem 1.25rem;text-align:center}
+    .stat-chip .num{font-family:var(--serif);font-size:1.5rem;color:var(--accent)}
+    .stat-chip .lbl{font-size:.7rem;color:var(--text2);text-transform:uppercase;letter-spacing:.08em}
+    code{font-family:var(--mono);font-size:.85rem;background:var(--bg3);border:1px solid var(--border);padding:.15rem .4rem;border-radius:4px;color:var(--accent2)}
+    .file-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.5rem}
+    .file-item{display:flex;align-items:center;gap:.75rem;padding:.6rem .9rem;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);font-size:.875rem}
+    .file-icon{font-family:var(--mono);font-size:.7rem;color:var(--accent2);background:rgba(88,166,255,.1);padding:.2rem .4rem;border-radius:4px;flex-shrink:0}
+    .file-name{color:var(--text3);font-family:var(--mono);font-size:.8rem}
+    .file-desc{color:var(--text2);font-size:.8rem;margin-left:auto}
+    .doc-link{display:inline-flex;align-items:center;gap:.5rem;padding:.6rem 1.2rem;border-radius:var(--radius);background:var(--bg2);border:1px solid var(--border);color:var(--accent2);text-decoration:none;font-size:.875rem;font-weight:500;margin-top:1.5rem;margin-right:.75rem;transition:all .2s}
+    .doc-link:hover{border-color:var(--accent2);background:rgba(88,166,255,.05)}
+    .outcome-chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+    .outcome-chip{font-size:.75rem;padding:.3rem .7rem;border-radius:4px;background:var(--bg3);border:1px solid var(--border);color:var(--text2);font-family:var(--mono)}
+    footer{background:var(--bg2);border-top:1px solid var(--border);padding:2rem;text-align:center}
+    footer p{color:var(--text2);font-size:.85rem}
+    footer a{color:var(--accent2);text-decoration:none}
+    @media(max-width:600px){.stat-row{gap:1rem}.file-desc{display:none}}
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">sf / cs499</a>
+      <a href="index.html" class="nav-back">← Back to Portfolio</a>
+    </div>
+  </nav>
+  <div class="page-wrap">
+    <span class="milestone-tag m3">Milestone Three</span>
+    <h1 class="page-title">Algorithms &amp; Data Structures</h1>
+    <p class="page-sub">Grazioso Salvare Rescue Animal Dashboard · CS 340 Enhancement</p>
+
+    <div class="stat-row">
+      <div class="stat-chip"><div class="num">33</div><div class="lbl">Unit Tests</div></div>
+      <div class="stat-chip"><div class="num">0</div><div class="lbl">Failures</div></div>
+      <div class="stat-chip"><div class="num">O(1)</div><div class="lbl">Animal Lookup</div></div>
+      <div class="stat-chip"><div class="num">O(log n)</div><div class="lbl">Age Filter</div></div>
+    </div>
+
+    <div class="divider"></div>
+    <h2>Artifact Description</h2>
+    <p>
+      Building on the software design foundation from Milestone Two, this enhancement addresses
+      the performance layer. The original application performed every rescue-type filter as a
+      full MongoDB collection scan — O(n) — repeated on every radio-button click. For the
+      Austin Animal Center's dataset of hundreds of thousands of records, this is unacceptable
+      at production scale.
+    </p>
+    <p>
+      The new <code>animal_shelter_ds.py</code> module introduces purpose-built in-memory data
+      structures that replace repeated O(n) scans with sub-linear in-session lookups.
+    </p>
+
+    <div class="divider"></div>
+    <h2>Data Structures Implemented</h2>
+
+    <div class="highlight-box">
+      <h3>AnimalIndex — Hash Map  <code>O(1) avg lookup</code></h3>
+      <p>
+        An in-memory hash map keyed on animal identifiers. After loading records into memory,
+        any individual record is retrieved in O(1) average time, eliminating repeated database
+        round-trips for the same record within a session.
+      </p>
+    </div>
+
+    <div class="highlight-box">
+      <h3>BreedInvertedIndex — Inverted Index  <code>O(k) lookup</code></h3>
+      <p>
+        Maps each normalized breed name to the set of animal IDs with that breed.
+        Building the index is O(n); subsequent breed lookups are O(k) where k is the result-set
+        size. The <code>multi_lookup()</code> method performs union across multiple breeds — the
+        OR semantics used by all rescue-type filters — without touching non-matching records.
+      </p>
+    </div>
+
+    <div class="highlight-box">
+      <h3>RescuePriorityQueue — Min-Heap  <code>O(log n) push/pop</code></h3>
+      <p>
+        Python's <code>heapq</code> min-heap with negated scores to simulate a max-heap,
+        surfacing the highest-suitability animals first. <code>top_n()</code> uses
+        <code>heapq.nsmallest</code> for O(k log n) retrieval without draining the queue.
+      </p>
+    </div>
+
+    <div class="highlight-box">
+      <h3>Binary Search Age Filter  <code>O(n log n) sort + O(log n) query</code></h3>
+      <p>
+        Records are sorted by age once (O(n log n)), then lower-bound and upper-bound binary
+        searches locate window boundaries in O(log n) each. Repeated queries reuse the sorted
+        array, making each subsequent filter O(log n + k) rather than O(n).
+      </p>
+    </div>
+
+    <div class="divider"></div>
+    <h2>Reflection</h2>
+    <p>
+      The most significant learning was the gap between knowing a data structure and knowing
+      when to use it. The decision to use an inverted index required recognizing that breed
+      filtering is essentially a set-membership query with OR semantics — exactly the problem
+      inverted indexes are designed for. Recognizing that required understanding the access
+      patterns of the application, not just the properties of the structure.
+    </p>
+    <p>
+      Implementing binary search without relying on Python's <code>bisect</code> module forced
+      careful thinking about loop invariants. The distinction between a lower-bound search
+      (first index &gt;= target) and an upper-bound search (one past last index &lt;= target)
+      is subtle but critical for a half-open interval filter.
+    </p>
+
+    <div class="outcome-chips">
+      <span class="outcome-chip">Outcome 3: Algorithmic Principles</span>
+      <span class="outcome-chip">Outcome 4: Innovative Techniques</span>
+    </div>
+
+    <a href="CS499_Milestone3_Narrative_Foltz.docx" class="doc-link" download>⬇ Download Narrative (.docx)</a>
+    <a href="https://github.com/stevenfoltz/cs499-capstone" class="doc-link" target="_blank" rel="noopener">View Code on GitHub →</a>
+  </div>
+
+  <footer>
+    <p>Steven Foltz · CS 499 Capstone · Southern New Hampshire University · 2026</p>
+    <p style="margin-top:.5rem;"><a href="index.html">← Back to Portfolio</a></p>
+  </footer>
+</body>
+</html>

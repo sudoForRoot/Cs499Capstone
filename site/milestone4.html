@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Milestone Four: Databases | Steven Foltz CS 499</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#0d1117;--bg2:#161b22;--bg3:#1c2128;--border:#30363d;
+      --accent:#3fb950;--accent2:#58a6ff;--accent3:#f78166;
+      --text:#e6edf3;--text2:#8b949e;--text3:#c9d1d9;
+      --serif:'DM Serif Display',serif;--sans:'DM Sans',sans-serif;--mono:'DM Mono',monospace;
+      --radius:8px;--max:860px;
+    }
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.7}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(13,17,23,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:60px;display:flex;align-items:center}
+    .nav-inner{max-width:1100px;width:100%;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between}
+    .nav-logo{font-family:var(--mono);font-size:.9rem;color:var(--accent);letter-spacing:.05em;text-decoration:none}
+    .nav-back{color:var(--text2);text-decoration:none;font-size:.875rem;font-weight:500;transition:color .2s}
+    .nav-back:hover{color:var(--text)}
+    .page-wrap{max-width:var(--max);margin:0 auto;padding:7rem 2rem 5rem}
+    .milestone-tag{display:inline-block;font-family:var(--mono);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .8rem;border-radius:999px;margin-bottom:1rem}
+    .m2{background:rgba(63,185,80,.12);color:var(--accent);border:1px solid rgba(63,185,80,.3)}
+    .m3{background:rgba(88,166,255,.12);color:var(--accent2);border:1px solid rgba(88,166,255,.3)}
+    .m4{background:rgba(247,129,102,.12);color:var(--accent3);border:1px solid rgba(247,129,102,.3)}
+    .page-title{font-family:var(--serif);font-size:clamp(2rem,4vw,2.8rem);color:var(--text);margin-bottom:.5rem;line-height:1.2}
+    .page-sub{color:var(--text2);font-size:1rem;margin-bottom:2rem}
+    .divider{height:1px;background:var(--border);margin:2.5rem 0}
+    h2{font-family:var(--serif);font-size:1.35rem;color:var(--text);margin:2.5rem 0 1rem}
+    h3{font-size:1rem;font-weight:600;color:var(--text3);margin:1.5rem 0 .5rem}
+    p{color:var(--text3);line-height:1.8;margin-bottom:1.2rem}
+    p:last-child{margin-bottom:0}
+    ul{color:var(--text3);line-height:1.8;margin-bottom:1.2rem;padding-left:1.5rem}
+    li{margin-bottom:.4rem}
+    .highlight-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin:1.5rem 0}
+    .highlight-box h3{margin-top:0}
+    .stat-row{display:flex;gap:2rem;flex-wrap:wrap;margin:1.5rem 0}
+    .stat-chip{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:.75rem 1.25rem;text-align:center}
+    .stat-chip .num{font-family:var(--serif);font-size:1.5rem;color:var(--accent)}
+    .stat-chip .lbl{font-size:.7rem;color:var(--text2);text-transform:uppercase;letter-spacing:.08em}
+    code{font-family:var(--mono);font-size:.85rem;background:var(--bg3);border:1px solid var(--border);padding:.15rem .4rem;border-radius:4px;color:var(--accent2)}
+    .file-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.5rem}
+    .file-item{display:flex;align-items:center;gap:.75rem;padding:.6rem .9rem;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);font-size:.875rem}
+    .file-icon{font-family:var(--mono);font-size:.7rem;color:var(--accent2);background:rgba(88,166,255,.1);padding:.2rem .4rem;border-radius:4px;flex-shrink:0}
+    .file-name{color:var(--text3);font-family:var(--mono);font-size:.8rem}
+    .file-desc{color:var(--text2);font-size:.8rem;margin-left:auto}
+    .doc-link{display:inline-flex;align-items:center;gap:.5rem;padding:.6rem 1.2rem;border-radius:var(--radius);background:var(--bg2);border:1px solid var(--border);color:var(--accent2);text-decoration:none;font-size:.875rem;font-weight:500;margin-top:1.5rem;margin-right:.75rem;transition:all .2s}
+    .doc-link:hover{border-color:var(--accent2);background:rgba(88,166,255,.05)}
+    .outcome-chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+    .outcome-chip{font-size:.75rem;padding:.3rem .7rem;border-radius:4px;background:var(--bg3);border:1px solid var(--border);color:var(--text2);font-family:var(--mono)}
+    footer{background:var(--bg2);border-top:1px solid var(--border);padding:2rem;text-align:center}
+    footer p{color:var(--text2);font-size:.85rem}
+    footer a{color:var(--accent2);text-decoration:none}
+    @media(max-width:600px){.stat-row{gap:1rem}.file-desc{display:none}}
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">sf / cs499</a>
+      <a href="index.html" class="nav-back">← Back to Portfolio</a>
+    </div>
+  </nav>
+  <div class="page-wrap">
+    <span class="milestone-tag m4">Milestone Four</span>
+    <h1 class="page-title">Databases</h1>
+    <p class="page-sub">Grazioso Salvare Rescue Animal Dashboard · CS 340 Enhancement</p>
+
+    <div class="stat-row">
+      <div class="stat-chip"><div class="num">21</div><div class="lbl">Unit Tests</div></div>
+      <div class="stat-chip"><div class="num">0</div><div class="lbl">Failures</div></div>
+      <div class="stat-chip"><div class="num">4</div><div class="lbl">Indexes Created</div></div>
+      <div class="stat-chip"><div class="num">1</div><div class="lbl">DB Round-Trip for 3 Filters</div></div>
+    </div>
+
+    <div class="divider"></div>
+    <h2>Artifact Description</h2>
+    <p>
+      The final enhancement addresses the database layer directly. The original application
+      treated MongoDB as a passive repository with no index management, no schema validation,
+      no connection pooling, and all data processing happening in Python. The new
+      <code>db_manager.py</code> module changes all of this.
+    </p>
+
+    <div class="divider"></div>
+    <h2>Database Enhancements</h2>
+
+    <div class="highlight-box">
+      <h3>ConnectionPool — Explicit Pool Sizing</h3>
+      <p>
+        Wraps <code>MongoClient</code> with <code>maxPoolSize=10</code>, <code>minPoolSize=2</code>,
+        and timeout settings. Exposes <code>is_healthy()</code> ping and <code>reconnect()</code>
+        for graceful degradation. A context manager provides MongoDB client sessions for
+        multi-document atomic operations.
+      </p>
+    </div>
+
+    <div class="highlight-box">
+      <h3>IndexManager — COLLSCAN → IXSCAN</h3>
+      <p>
+        Creates four indexes: single-field on <code>animal_type</code>, sparse single-field on
+        <code>age_upon_outcome_in_weeks</code>, a <strong>compound index</strong> on
+        <code>(animal_type, breed, age_upon_outcome_in_weeks)</code> optimized for rescue queries,
+        and a text index on <code>name</code>. The compound index converts O(n) collection
+        scans to O(log n + k) index scans for all three rescue-type filters.
+      </p>
+    </div>
+
+    <div class="highlight-box">
+      <h3>SchemaValidator — Write-Time Enforcement</h3>
+      <p>
+        Applies a JSON Schema using MongoDB's <code>collMod</code> command: <code>animal_type</code>
+        must be one of a controlled vocabulary, <code>breed</code> must be a non-empty string,
+        age must be between 0–2000 weeks, and coordinates must be valid geographic ranges.
+        Uses "moderate" validation level to accommodate pre-existing non-conforming documents.
+      </p>
+    </div>
+
+    <div class="highlight-box">
+      <h3>AggregationPipelines — Server-Side Computation</h3>
+      <p>
+        Four pipelines move computation into MongoDB: <code>breed_distribution()</code> groups
+        by breed with an optional filter, <code>age_statistics()</code> computes min/max/avg/stddev,
+        <code>rescue_type_summary()</code> uses <code>$facet</code> to evaluate all three rescue
+        filters in a single round-trip, and <code>outcome_type_distribution()</code> groups by
+        outcome type.
+      </p>
+    </div>
+
+    <div class="highlight-box">
+      <h3>QueryPerformanceLogger — Observability</h3>
+      <p>
+        Wraps <code>find()</code> with <code>explain()</code> analysis that extracts the winning
+        query plan stage, index name, documents examined vs. returned, and execution time.
+        COLLSCAN operations are promoted to WARNING-level log entries, surfacing missing indexes
+        immediately during development.
+      </p>
+    </div>
+
+    <div class="divider"></div>
+    <h2>Reflection</h2>
+    <p>
+      The most significant learning was understanding where the boundary lies between application
+      and database logic. The same computation that required loading all documents into a DataFrame
+      and calling <code>groupby()</code> can instead be expressed as a two-stage pipeline that
+      MongoDB executes using an index scan, returning only the aggregated result.
+    </p>
+    <p>
+      The tension between schema validation strictness and compatibility with legacy data was also
+      a genuine challenge. Setting <code>validationLevel="strict"</code> immediately rejected
+      updates to documents whose <code>age_upon_outcome_in_weeks</code> was stored as a BSON
+      string rather than a number — a real data-quality issue in the AAC dataset.
+      Switching to "moderate" resolved this and the trade-off is documented in the module's docstring.
+    </p>
+
+    <div class="outcome-chips">
+      <span class="outcome-chip">Outcome 3: Trade-off Reasoning</span>
+      <span class="outcome-chip">Outcome 4: Database Tools</span>
+      <span class="outcome-chip">Outcome 5: Security — Schema Validation</span>
+    </div>
+
+    <a href="CS499_Milestone4_Narrative_Foltz.docx" class="doc-link" download>⬇ Download Narrative (.docx)</a>
+    <a href="https://github.com/stevenfoltz/cs499-capstone" class="doc-link" target="_blank" rel="noopener">View Code on GitHub →</a>
+  </div>
+
+  <footer>
+    <p>Steven Foltz · CS 499 Capstone · Southern New Hampshire University · 2026</p>
+    <p style="margin-top:.5rem;"><a href="index.html">← Back to Portfolio</a></p>
+  </footer>
+</body>
+</html>
